@@ -67,6 +67,25 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        LANGUAGE SWITCHER & TRANSLATION SYSTEM
        ========================================================================== */
+    // Safe LocalStorage wrapper to avoid SecurityError in restricted/incognito frames or local previews
+    const safeLocalStorage = {
+        getItem(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                return null;
+            }
+        },
+        setItem(key, value) {
+            try {
+                localStorage.setItem(key, value);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+    };
+
     const langBtn = document.querySelector('.lang-btn');
     const langDropdown = document.querySelector('.lang-dropdown');
     const langSelectorContainer = document.querySelector('.lang-selector-container');
@@ -80,25 +99,47 @@ document.addEventListener('DOMContentLoaded', () => {
         langBtn.setAttribute('aria-expanded', !isOpen);
     });
 
-    // Close on click outside
-    document.addEventListener('click', (e) => {
+    // Keyboard controls for the toggle button
+    langBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const isOpen = langDropdown.classList.contains('show');
+            if (!isOpen) {
+                langDropdown.classList.add('show');
+                langBtn.setAttribute('aria-expanded', 'true');
+            }
+            const activeOpt = langDropdown.querySelector('li.active') || langOptions[0];
+            if (activeOpt) {
+                activeOpt.focus();
+            }
+        }
+    });
+
+    // Close on click or touch outside (touchstart makes it robust on mobile iOS Safari)
+    const closeDropdownOutside = (e) => {
         if (!langSelectorContainer.contains(e.target)) {
             langDropdown.classList.remove('show');
             langBtn.setAttribute('aria-expanded', 'false');
         }
-    });
+    };
+    document.addEventListener('click', closeDropdownOutside);
+    document.addEventListener('touchstart', closeDropdownOutside);
 
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
+            const wasOpen = langDropdown.classList.contains('show');
             langDropdown.classList.remove('show');
             langBtn.setAttribute('aria-expanded', 'false');
+            if (wasOpen) {
+                langBtn.focus();
+            }
         }
     });
 
-    // Handle language selection
-    langOptions.forEach(option => {
-        option.addEventListener('click', () => {
+    // Handle language selection & keyboard navigation
+    langOptions.forEach((option, index) => {
+        const selectLang = () => {
             const selectedLang = option.getAttribute('data-lang');
             
             // Set active class in UI
@@ -112,9 +153,32 @@ document.addEventListener('DOMContentLoaded', () => {
             // Close dropdown
             langDropdown.classList.remove('show');
             langBtn.setAttribute('aria-expanded', 'false');
+            langBtn.focus(); // return focus to the button
 
             // Apply translations
             applyLanguage(selectedLang);
+        };
+
+        option.addEventListener('click', selectLang);
+
+        option.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectLang();
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextIndex = (index + 1) % langOptions.length;
+                langOptions[nextIndex].focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevIndex = (index - 1 + langOptions.length) % langOptions.length;
+                langOptions[prevIndex].focus();
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                langDropdown.classList.remove('show');
+                langBtn.setAttribute('aria-expanded', 'false');
+                langBtn.focus();
+            }
         });
     });
 
@@ -122,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyLanguage(lang) {
         if (!translations[lang]) return;
 
-        localStorage.setItem('preferred-lang', lang);
+        safeLocalStorage.setItem('preferred-lang', lang);
         document.documentElement.lang = lang;
 
         // Update elements with text content (handles HTML nodes)
@@ -276,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const currentLang = localStorage.getItem('preferred-lang') || 'vi';
+        const currentLang = safeLocalStorage.getItem('preferred-lang') || 'vi';
 
         // Simulating Form Submission success
         const submitBtn = document.getElementById('submit-btn');
@@ -330,7 +394,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return 'vi'; // fallback default
     }
 
-    const savedLang = localStorage.getItem('preferred-lang') || getBrowserLanguage();
+    let savedLang = safeLocalStorage.getItem('preferred-lang') || getBrowserLanguage();
+    // Sanitize savedLang to ensure it is supported
+    if (!translations[savedLang]) {
+        savedLang = 'vi';
+    }
     const activeOption = langDropdown.querySelector(`[data-lang="${savedLang}"]`) || langDropdown.querySelector('[data-lang="vi"]');
     if (activeOption) {
         langOptions.forEach(opt => {
