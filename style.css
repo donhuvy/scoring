@@ -236,6 +236,13 @@ img {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--transition-fast);
+}
+
+.logo:hover {
+    transform: scale(1.03);
 }
 
 .logo-icon {

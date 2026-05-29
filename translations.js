@@ -12,6 +12,7 @@ const translations = {
         nav_support: "Hỗ trợ",
         nav_download: "Tải ứng dụng",
         nav_aria_label: "Menu điều hướng chính",
+        logo_aria_label: "Vy score - Quay lại trang chủ",
         lang_label: "Tiếng Việt",
 
         // Hero Section
@@ -138,6 +139,7 @@ const translations = {
         nav_support: "Support",
         nav_download: "Download App",
         nav_aria_label: "Main navigation menu",
+        logo_aria_label: "Vy score - Back to home page",
         lang_label: "English (US)",
 
         // Hero Section
@@ -264,6 +266,7 @@ const translations = {
         nav_support: "客户支持",
         nav_download: "下载应用",
         nav_aria_label: "主导航菜单",
+        logo_aria_label: "Vy score - 返回首页",
         lang_label: "简体中文",
 
         // Hero Section
