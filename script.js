@@ -65,18 +65,154 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
+       LANGUAGE SWITCHER & TRANSLATION SYSTEM
+       ========================================================================== */
+    const langBtn = document.querySelector('.lang-btn');
+    const langDropdown = document.querySelector('.lang-dropdown');
+    const langSelectorContainer = document.querySelector('.lang-selector-container');
+    const langOptions = langDropdown.querySelectorAll('li');
+
+    // Toggle dropdown
+    langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = langDropdown.classList.contains('show');
+        langDropdown.classList.toggle('show', !isOpen);
+        langBtn.setAttribute('aria-expanded', !isOpen);
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+        if (!langSelectorContainer.contains(e.target)) {
+            langDropdown.classList.remove('show');
+            langBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            langDropdown.classList.remove('show');
+            langBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Handle language selection
+    langOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const selectedLang = option.getAttribute('data-lang');
+            
+            // Set active class in UI
+            langOptions.forEach(opt => {
+                opt.classList.remove('active');
+                opt.setAttribute('aria-selected', 'false');
+            });
+            option.classList.add('active');
+            option.setAttribute('aria-selected', 'true');
+            
+            // Close dropdown
+            langDropdown.classList.remove('show');
+            langBtn.setAttribute('aria-expanded', 'false');
+
+            // Apply translations
+            applyLanguage(selectedLang);
+        });
+    });
+
+    // Function to apply translations
+    function applyLanguage(lang) {
+        if (!translations[lang]) return;
+
+        localStorage.setItem('preferred-lang', lang);
+        document.documentElement.lang = lang;
+
+        // Update elements with text content (handles HTML nodes)
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+
+        // Update placeholders
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (translations[lang][key]) {
+                el.setAttribute('placeholder', translations[lang][key]);
+            }
+        });
+
+        // Update alt attributes
+        document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+            const key = el.getAttribute('data-i18n-alt');
+            if (translations[lang][key]) {
+                el.setAttribute('alt', translations[lang][key]);
+            }
+        });
+
+        // Update aria-labels
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+            const key = el.getAttribute('data-i18n-aria-label');
+            if (translations[lang][key]) {
+                el.setAttribute('aria-label', translations[lang][key]);
+            }
+        });
+
+        // Update data-title for Lightbox
+        document.querySelectorAll('[data-i18n-data-title]').forEach(el => {
+            const key = el.getAttribute('data-i18n-data-title');
+            if (translations[lang][key]) {
+                el.setAttribute('data-title', translations[lang][key]);
+            }
+        });
+
+        // Update document title & meta description
+        if (translations[lang].page_title) {
+            document.title = translations[lang].page_title;
+        }
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc && translations[lang].meta_description) {
+            metaDesc.setAttribute('content', translations[lang].meta_description);
+        }
+
+        // Update Lightbox option dynamically
+        let albumLabelText = "Hình %1 / %2";
+        if (lang === 'en') albumLabelText = "Image %1 of %2";
+        else if (lang === 'zh-CN') albumLabelText = "第 %1 张，共 %2 张";
+        
+        if (typeof lightbox !== 'undefined') {
+            lightbox.option({
+                'albumLabel': albumLabelText,
+                'wrapAround': true,
+                'fadeDuration': 300,
+                'imageFadeDuration': 300
+            });
+        }
+
+        // Update contact form validation messages
+        updateValidationMessages(lang);
+    }
+
+    /* ==========================================================================
        FORM VALIDATION & SUBMISSION
        ========================================================================== */
     const form = document.getElementById('contact-form');
     const honeypot = document.getElementById('honeypot');
     const toast = document.getElementById('toast');
 
-    // Custom validation messages in Vietnamese
+    // Dynamic validation messages object
     const validationMessages = {
-        valueMissing: 'Trường này là bắt buộc, vui lòng không bỏ trống.',
-        typeMismatch: 'Định dạng email không hợp lệ (ví dụ: name@example.com).',
-        tooShort: (min) => `Vui lòng nhập tối thiểu ${min} ký tự.`
+        valueMissing: '',
+        typeMismatch: '',
+        tooShort: null
     };
+
+    function updateValidationMessages(lang) {
+        validationMessages.valueMissing = translations[lang].val_required;
+        validationMessages.typeMismatch = translations[lang].val_email_format;
+        validationMessages.tooShort = (min) => {
+            return translations[lang].val_too_short.replace('{min}', min);
+        };
+    }
 
     const validateField = (input) => {
         const errorSpan = document.getElementById(`${input.id}-error`);
@@ -140,15 +276,17 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const currentLang = localStorage.getItem('preferred-lang') || 'vi';
+
         // Simulating Form Submission success
         const submitBtn = document.getElementById('submit-btn');
         const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Đang gửi...';
+        submitBtn.textContent = translations[currentLang].btn_sending;
 
         setTimeout(() => {
             // Show toast message
-            showToast('Yêu cầu hỗ trợ đã được gửi thành công!');
+            showToast(translations[currentLang].toast_success);
             
             // Reset form
             form.reset();
@@ -162,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
+            submitBtn.textContent = translations[currentLang].form_submit_btn;
         }, 1200);
     });
 
@@ -179,5 +317,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     };
 
+    /* ==========================================================================
+       INITIALIZE LANGUAGE PREFERENCE
+       ========================================================================== */
+    function getBrowserLanguage() {
+        const browserLang = navigator.language || navigator.userLanguage;
+        if (browserLang) {
+            const lowerLang = browserLang.toLowerCase();
+            if (lowerLang.startsWith('zh')) return 'zh-CN';
+            if (lowerLang.startsWith('en')) return 'en';
+        }
+        return 'vi'; // fallback default
+    }
 
+    const savedLang = localStorage.getItem('preferred-lang') || getBrowserLanguage();
+    const activeOption = langDropdown.querySelector(`[data-lang="${savedLang}"]`) || langDropdown.querySelector('[data-lang="vi"]');
+    if (activeOption) {
+        langOptions.forEach(opt => {
+            opt.classList.remove('active');
+            opt.setAttribute('aria-selected', 'false');
+        });
+        activeOption.classList.add('active');
+        activeOption.setAttribute('aria-selected', 'true');
+        applyLanguage(savedLang);
+    }
 });
