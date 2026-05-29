@@ -1,3 +1,3 @@
-# Scoring
+# Vy score
 
 multichoice scoring application.

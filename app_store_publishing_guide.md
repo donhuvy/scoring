@@ -1,6 +1,6 @@
-# Guide: Publishing the "Scoring" App to the Apple App Store
+# Guide: Publishing the "Vy score" App to the Apple App Store
 
-This guide outlines the step-by-step process of preparing, archiving, uploading, and submitting the **Scoring** (`cham_trac_nghiem`) app to the Apple App Store.
+This guide outlines the step-by-step process of preparing, archiving, uploading, and submitting the **Vy score** (`cham_trac_nghiem`) app to the Apple App Store.
 
 ```mermaid
 graph TD
@@ -38,7 +38,7 @@ Configure your project settings inside Xcode to make sure the app signs correctl
 2. Select the top-level project file `cham_trac_nghiem` in the Project Navigator.
 3. Select the target **cham_trac_nghiem** under **Targets**.
 4. Select the **General** tab:
-    *   **Display Name**: Ensure this is set to **Scoring** (or your preferred user-facing name).
+    *   **Display Name**: Ensure this is set to **Vy score** (or your preferred user-facing name).
     *   **Bundle Identifier**: Verify it is set to `com.donhuvy.cham-trac-nghiem`.
     *   **Version**: Set to `1.0.0` (for your first release).
     *   **Build**: Set to `1` (increment this number with every upload you send to App Store Connect).
@@ -65,10 +65,10 @@ You need to register your app's bundle ID on the portal before uploading.
 2. Go to **My Apps** and click the **`+`** icon -> **New App**.
 3. Fill out the dialog:
     *   **Platforms**: iOS.
-    *   **Name**: `Scoring - Chấm Trắc Nghiệm` (needs to be unique across the App Store).
+    *   **Name**: `Vy score - Chấm Trắc Nghiệm` (needs to be unique across the App Store).
     *   **Primary Language**: Vietnamese (or English, depending on your primary audience).
     *   **Bundle ID**: Select `com.donhuvy.cham-trac-nghiem` from the dropdown list.
-    *   **SKU**: A unique ID for your app (e.g., `com.donhuvy.scoring.sku1`).
+    *   **SKU**: A unique ID for your app (e.g., `com.donhuvy.vy-score.sku1`).
     *   **User Access**: Full Access.
 4. Click **Create**.
 

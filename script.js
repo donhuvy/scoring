@@ -178,4 +178,116 @@ document.addEventListener('DOMContentLoaded', () => {
             toast.setAttribute('aria-hidden', 'true');
         }, 4000);
     };
+
+    /* ==========================================================================
+       LIGHTBOX / SCREENSHOTS GALLERY LOGIC
+       ========================================================================== */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const prevBtn = lightbox.querySelector('.lightbox-prev');
+    const nextBtn = lightbox.querySelector('.lightbox-next');
+    const screenshotItems = Array.from(document.querySelectorAll('.screenshot-item'));
+    
+    let currentImageIndex = 0;
+    let lastActiveElement = null;
+
+    const openLightbox = (index) => {
+        lastActiveElement = document.activeElement;
+        currentImageIndex = index;
+        updateLightboxContent();
+        lightbox.setAttribute('aria-hidden', 'false');
+        closeBtn.focus();
+        
+        // Disable body scroll when lightbox is open
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastActiveElement) {
+            lastActiveElement.focus();
+        }
+    };
+
+    const updateLightboxContent = () => {
+        const item = screenshotItems[currentImageIndex];
+        const img = item.querySelector('img');
+        
+        // Dynamic loading of source
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        
+        // Polish caption (strip developer/system prefixes for premium look)
+        const rawAlt = img.alt || '';
+        const cleanCaption = rawAlt.replace('Giao diện màn hình ứng dụng Vy score - ', '');
+        lightboxCaption.textContent = cleanCaption;
+    };
+
+    const nextImage = () => {
+        currentImageIndex = (currentImageIndex + 1) % screenshotItems.length;
+        updateLightboxContent();
+    };
+
+    const prevImage = () => {
+        currentImageIndex = (currentImageIndex - 1 + screenshotItems.length) % screenshotItems.length;
+        updateLightboxContent();
+    };
+
+    // Event Listeners for Gallery Items
+    screenshotItems.forEach((item, index) => {
+        item.addEventListener('click', () => openLightbox(index));
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openLightbox(index);
+            }
+        });
+    });
+
+    // Close & Nav Listeners
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
+
+    // Click backdrop to close
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // Keyboard controls (ESC, Arrow keys, Tab trap)
+    document.addEventListener('keydown', (e) => {
+        const isLightboxOpen = lightbox.getAttribute('aria-hidden') === 'false';
+        if (!isLightboxOpen) return;
+
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === 'ArrowRight' || e.key === 'Right') {
+            nextImage();
+        } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
+            prevImage();
+        } else if (e.key === 'Tab') {
+            // Trap focus within lightbox buttons
+            const focusables = [closeBtn, prevBtn, nextBtn];
+            const activeElement = document.activeElement;
+            
+            if (e.shiftKey) {
+                // Shift + Tab (go backwards)
+                if (activeElement === focusables[0]) {
+                    focusables[focusables.length - 1].focus();
+                    e.preventDefault();
+                }
+            } else {
+                // Tab (go forwards)
+                if (activeElement === focusables[focusables.length - 1]) {
+                    focusables[0].focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
 });
