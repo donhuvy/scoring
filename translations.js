@@ -66,6 +66,18 @@ const translations = {
         screenshot_alt_13: "Giao diện màn hình ứng dụng Vy score - Chi tiết phiếu chấm bài",
         screenshot_title_14: "Cấu hình đáp án đề thi",
         screenshot_alt_14: "Giao diện màn hình ứng dụng Vy score - Cấu hình đáp án đề thi",
+        screenshot_title_15: "Biểu tượng ứng dụng trên màn hình chính",
+        screenshot_alt_15: "Biểu tượng ứng dụng Vy score (Scoring) trên màn hình chính iPhone",
+
+        // Navigation - Video Demo
+        nav_video: "Video Demo",
+
+        // Video Demo Section
+        video_title: "Video minh hoạ ứng dụng",
+        video_subtitle: "Xem quy trình chấm điểm trắc nghiệm thực tế bằng camera AI chỉ trong vài giây.",
+        video_badge: "Xem trực tiếp",
+        video_desc: "Video ghi lại quá trình sử dụng ứng dụng <strong>Vy score</strong> trên iPhone: từ mở ứng dụng, chọn đề thi, đưa camera quét phiếu trả lời, đến nhận kết quả điểm số ngay lập tức.",
+        video_aria_label: "Video minh hoạ quy trình chấm thi trắc nghiệm bằng camera AI",
 
         // Privacy Policy Section
         privacy_title: "Chính sách bảo mật (Privacy Policy)",
@@ -193,6 +205,18 @@ const translations = {
         screenshot_alt_13: "Vy score application interface - Answer Sheet Details",
         screenshot_title_14: "Exam Answer Key Configuration",
         screenshot_alt_14: "Vy score application interface - Exam Answer Key Configuration",
+        screenshot_title_15: "App Icon on Home Screen",
+        screenshot_alt_15: "Vy score (Scoring) app icon on iPhone Home Screen",
+
+        // Navigation - Video Demo
+        nav_video: "Video Demo",
+
+        // Video Demo Section
+        video_title: "App Demo Video",
+        video_subtitle: "Watch the real-time multiple-choice grading process using AI camera in just a few seconds.",
+        video_badge: "Watch Live",
+        video_desc: "This video captures the complete workflow of using <strong>Vy score</strong> on an iPhone: from opening the app, selecting an exam, scanning the answer sheet with the camera, to receiving the score instantly.",
+        video_aria_label: "Demo video of the AI camera multiple-choice grading workflow",
 
         // Privacy Policy Section
         privacy_title: "Privacy Policy",
@@ -320,6 +344,18 @@ const translations = {
         screenshot_alt_13: "Vy score 应用程序界面 - 答题卡详情",
         screenshot_title_14: "试卷标准答案设置",
         screenshot_alt_14: "Vy score 应用程序界面 - 试卷标准答案设置",
+        screenshot_title_15: "主屏幕上的应用图标",
+        screenshot_alt_15: "iPhone 主屏幕上的 Vy score (Scoring) 应用图标",
+
+        // Navigation - Video Demo
+        nav_video: "演示视频",
+
+        // Video Demo Section
+        video_title: "应用演示视频",
+        video_subtitle: "观看 AI 相机实时选择题阅卷的完整流程，仅需数秒即可完成。",
+        video_badge: "实时观看",
+        video_desc: "本视频完整记录了在 iPhone 上使用 <strong>Vy score</strong> 的全过程：从打开应用、选择试卷、用相机扫描答题卡，到即时获得评分结果。",
+        video_aria_label: "AI 相机选择题阅卷流程演示视频",
 
         // Privacy Policy Section
         privacy_title: "隐私政策",
