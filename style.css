@@ -20,7 +20,7 @@
     --success: #2b8a3e;
     
     /* Layout */
-    --max-width: 1200px;
+    --max-width: 1400px;
     --header-height: 80px;
     --radius-sm: 8px;
     --radius-md: 16px;
@@ -121,7 +121,7 @@ img {
    LAYOUT CONTAINERS & UTILITIES
    ========================================================================== */
 .container {
-    width: 90%;
+    width: 95%;
     max-width: var(--max-width);
     margin: 0 auto;
 }
@@ -478,8 +478,9 @@ img {
 
 .video-mockup {
     width: 100%;
-    height: auto;
+    aspect-ratio: 9 / 16;
     display: block;
+    border: none;
     border-radius: calc(var(--radius-lg) - 6px);
 }
 
