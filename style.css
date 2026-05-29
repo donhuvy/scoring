@@ -2,22 +2,22 @@
    DESIGN SYSTEM & VARIABLES
    ========================================================================== */
 :root {
-    /* Color Palette (Arial & Red/White/Black Theme) */
-    --bg-main: #000000;
-    --bg-surface: #121212;
-    --bg-surface-elevated: #1a1a1a;
+    /* Color Palette (Light Mode: Black/Red text on White background) */
+    --bg-main: #ffffff;
+    --bg-surface: #f8f9fa;
+    --bg-surface-elevated: #f1f3f5;
     --primary: #ff0000; /* Red */
-    --primary-glow: rgba(255, 0, 0, 0.15);
-    --secondary: #ffffff; /* White */
-    --secondary-glow: rgba(255, 255, 255, 0.15);
+    --primary-glow: rgba(255, 0, 0, 0.08);
+    --secondary: #000000; /* Black */
+    --secondary-glow: rgba(0, 0, 0, 0.08);
     --accent: #ff0000; /* Red */
-    --text-primary: #ffffff;
-    --text-secondary: #cccccc;
-    --text-muted: #888888;
-    --border: rgba(255, 255, 255, 0.1);
+    --text-primary: #000000; /* Black */
+    --text-secondary: #495057; /* Dark Grey */
+    --text-muted: #868e96; /* Medium Grey */
+    --border: rgba(0, 0, 0, 0.1);
     --border-focus: #ff0000;
     --error: #ff0000;
-    --success: #10b981;
+    --success: #2b8a3e;
     
     /* Layout */
     --max-width: 1200px;
@@ -190,14 +190,15 @@ img {
 }
 
 .btn-secondary {
-    background-color: var(--bg-surface-elevated);
+    background-color: transparent;
     color: var(--text-primary);
-    border: 1px solid var(--border);
+    border: 1px solid var(--text-primary);
 }
 
 .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: var(--text-secondary);
+    background-color: var(--text-primary);
+    color: var(--bg-main);
+    border-color: var(--text-primary);
     transform: translateY(-2px);
 }
 
@@ -211,7 +212,7 @@ img {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-block-end: 1px solid var(--border);
@@ -220,8 +221,8 @@ img {
 
 .main-header.scrolled {
     height: 70px;
-    background: rgba(0, 0, 0, 0.95);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
 .header-container {
@@ -246,7 +247,7 @@ img {
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.5px;
-    background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
+    background: linear-gradient(135deg, #000000 0%, var(--primary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -296,8 +297,8 @@ img {
     padding-block-end: 6rem;
     position: relative;
     background-image: 
-        radial-gradient(circle at 10% 20%, rgba(255, 0, 0, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+        radial-gradient(circle at 10% 20%, rgba(255, 0, 0, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.02) 0%, transparent 40%);
 }
 
 .hero-container {
@@ -369,7 +370,7 @@ img {
    ========================================================================== */
 .features-section {
     padding: 6rem 0;
-    background-color: rgba(255, 255, 255, 0.01);
+    background-color: rgba(0, 0, 0, 0.01);
     border-block-start: 1px solid var(--border);
     border-block-end: 1px solid var(--border);
 }
@@ -423,7 +424,7 @@ img {
     padding-block-end: 2rem;
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;
-    scrollbar-color: var(--secondary) rgba(255, 255, 255, 0.05);
+    scrollbar-color: var(--secondary) rgba(0, 0, 0, 0.05);
 }
 
 /* Custom scrollbar styling for webkit */
@@ -432,7 +433,7 @@ img {
 }
 
 .screenshots-gallery::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     border-radius: 10px;
 }
 
@@ -459,8 +460,8 @@ img {
 
 .screenshot-item:hover {
     transform: translateY(-5px) scale(1.02);
-    border-color: var(--secondary);
-    box-shadow: 0 12px 30px var(--secondary-glow);
+    border-color: var(--primary);
+    box-shadow: 0 12px 30px var(--primary-glow);
 }
 
 .screenshot-item img {
@@ -477,11 +478,11 @@ img {
 }
 
 .privacy-card {
-    background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(0, 0, 0, 0.7) 100%);
+    background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(255, 255, 255, 0.9) 100%);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 4rem 3rem;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
 }
 
 .privacy-content {
@@ -519,7 +520,7 @@ img {
    ========================================================================== */
 .faq-section {
     padding: 6rem 0;
-    background-color: rgba(255, 255, 255, 0.01);
+    background-color: rgba(0, 0, 0, 0.01);
     border-block-start: 1px solid var(--border);
 }
 
@@ -540,7 +541,7 @@ img {
 }
 
 .faq-item:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(0, 0, 0, 0.2);
 }
 
 .faq-trigger {
@@ -690,7 +691,7 @@ img {
 
 .form-group input:hover,
 .form-group textarea:hover {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(0, 0, 0, 0.25);
 }
 
 .form-group input:focus,
@@ -722,7 +723,7 @@ img {
    FOOTER
    ========================================================================== */
 .main-footer {
-    background-color: #000000;
+    background-color: #f8f9fa;
     padding: 3rem 0;
     border-block-start: 1px solid var(--border);
 }
@@ -759,7 +760,7 @@ img {
     border: 1px solid var(--success);
     border-radius: var(--radius-sm);
     padding: 1rem 1.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     z-index: 9999;
     transform: translateY(150%);
     opacity: 0;
