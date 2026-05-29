@@ -410,6 +410,66 @@ img {
 }
 
 /* ==========================================================================
+   SCREENSHOTS GALLERY SECTION
+   ========================================================================== */
+.screenshots-section {
+    padding: 6rem 0;
+}
+
+.screenshots-gallery {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-block-end: 2rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) rgba(255, 255, 255, 0.05);
+}
+
+/* Custom scrollbar styling for webkit */
+.screenshots-gallery::-webkit-scrollbar {
+    height: 8px;
+}
+
+.screenshots-gallery::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+}
+
+.screenshots-gallery::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+    border: 1px solid var(--bg-main);
+}
+
+.screenshots-gallery::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+.screenshot-item {
+    flex: 0 0 280px; /* fixed width for screenshots */
+    scroll-snap-align: start;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 3px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-normal);
+    background-color: #000;
+}
+
+.screenshot-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--secondary);
+    box-shadow: 0 12px 30px var(--secondary-glow);
+}
+
+.screenshot-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* ==========================================================================
    PRIVACY POLICY SECTION (Card style)
    ========================================================================== */
 .privacy-section {
