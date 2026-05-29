@@ -2,21 +2,21 @@
    DESIGN SYSTEM & VARIABLES
    ========================================================================== */
 :root {
-    /* Color Palette (HSL Tailored) */
-    --bg-main: #0b0f19;
-    --bg-surface: #131a2d;
-    --bg-surface-elevated: #1e2640;
-    --primary: #6366f1; /* Indigo */
-    --primary-glow: rgba(99, 102, 241, 0.15);
-    --secondary: #06b6d4; /* Cyan */
-    --secondary-glow: rgba(6, 182, 212, 0.15);
-    --accent: #d946ef; /* Magenta */
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-focus: #6366f1;
-    --error: #ef4444;
+    /* Color Palette (Arial & Red/White/Black Theme) */
+    --bg-main: #000000;
+    --bg-surface: #121212;
+    --bg-surface-elevated: #1a1a1a;
+    --primary: #ff0000; /* Red */
+    --primary-glow: rgba(255, 0, 0, 0.15);
+    --secondary: #ffffff; /* White */
+    --secondary-glow: rgba(255, 255, 255, 0.15);
+    --accent: #ff0000; /* Red */
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-muted: #888888;
+    --border: rgba(255, 255, 255, 0.1);
+    --border-focus: #ff0000;
+    --error: #ff0000;
     --success: #10b981;
     
     /* Layout */
@@ -42,20 +42,20 @@
 
 html {
     scroll-behavior: smooth;
-    font-size: 16px; /* 1rem = 16px */
+    font-size: 18px; /* 1rem = 18px */
 }
 
 body {
     background-color: var(--bg-main);
     color: var(--text-primary);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Outfit', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: 700;
     line-height: 1.25;
     color: var(--text-primary);
@@ -175,14 +175,14 @@ img {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, #cc0000 100%);
     color: white;
     box-shadow: 0 4px 14px var(--primary-glow);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.35);
 }
 
 .btn-primary:active {
@@ -211,7 +211,7 @@ img {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(11, 15, 25, 0.7);
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-block-end: 1px solid var(--border);
@@ -220,7 +220,7 @@ img {
 
 .main-header.scrolled {
     height: 70px;
-    background: rgba(11, 15, 25, 0.95);
+    background: rgba(0, 0, 0, 0.95);
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
@@ -242,11 +242,11 @@ img {
 }
 
 .logo-text {
-    font-family: 'Outfit', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.5px;
-    background: linear-gradient(135deg, #ffffff 0%, var(--secondary) 100%);
+    background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -296,8 +296,8 @@ img {
     padding-block-end: 6rem;
     position: relative;
     background-image: 
-        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+        radial-gradient(circle at 10% 20%, rgba(255, 0, 0, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
 }
 
 .hero-container {
@@ -309,8 +309,8 @@ img {
 
 .hero-content .badge {
     background-color: var(--primary-glow);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    color: #a5b4fc;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    color: var(--primary);
     padding: 0.35rem 0.85rem;
     font-size: 0.8rem;
     font-weight: 600;
@@ -390,8 +390,8 @@ img {
 
 .feature-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(99, 102, 241, 0.4);
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.05);
+    border-color: rgba(255, 0, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.05);
 }
 
 .feature-icon {
@@ -477,7 +477,7 @@ img {
 }
 
 .privacy-card {
-    background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(19, 26, 45, 0.7) 100%);
+    background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(0, 0, 0, 0.7) 100%);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 4rem 3rem;
@@ -552,7 +552,7 @@ img {
     background: none;
     border: none;
     color: var(--text-primary);
-    font-family: 'Outfit', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.1rem;
     font-weight: 600;
     text-align: left;
@@ -697,7 +697,7 @@ img {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--border-focus);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
 
 /* Input validation states */
@@ -708,7 +708,7 @@ img {
 
 .form-group.invalid input:focus,
 .form-group.invalid textarea:focus {
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
 
 .error-msg {
@@ -722,7 +722,7 @@ img {
    FOOTER
    ========================================================================== */
 .main-footer {
-    background-color: #060911;
+    background-color: #000000;
     padding: 3rem 0;
     border-block-start: 1px solid var(--border);
 }
