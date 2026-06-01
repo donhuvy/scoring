@@ -21,6 +21,7 @@ const translations = {
         hero_desc: "Sử dụng công nghệ nhận diện hình ảnh YOLO26 thông minh, <strong>Vy score</strong> giúp giáo viên chấm điểm bài thi trắc nghiệm chỉ trong 1 giây bằng camera điện thoại. Dữ liệu xử lý offline hoàn toàn 100% bảo mật.",
         hero_btn_support: "Liên hệ hỗ trợ",
         hero_btn_privacy: "Đọc chính sách bảo mật",
+        hero_btn_download_android: "Tải bản Android (APK)",
         hero_img_alt: "Giao diện Dashboard ứng dụng Vy score trên điện thoại iPhone",
 
         // Features Section
@@ -136,7 +137,31 @@ const translations = {
         btn_sending: "Đang gửi...",
         val_required: "Trường này là bắt buộc, vui lòng không bỏ trống.",
         val_email_format: "Định dạng email không hợp lệ (ví dụ: name@example.com).",
-        val_too_short: "Vui lòng nhập tối thiểu {min} ký tự."
+        val_too_short: "Vui lòng nhập tối thiểu {min} ký tự.",
+
+        // Android Page
+        android_page_title: "Vy score - Tải ứng dụng cho Android",
+        android_meta_description: "Tải ứng dụng Vy score chấm thi trắc nghiệm bằng AI camera phiên bản Android dưới dạng APK và hướng dẫn cài đặt chi tiết.",
+        android_hero_badge: "Dành cho thiết bị Android",
+        android_hero_title: "Tải Vy score cho Android",
+        android_hero_desc: "Tải về trực tiếp file cài đặt APK phiên bản Android chính thức của ứng dụng Vy score. Ứng dụng hoạt động offline 100% giúp chấm thi nhanh chóng và bảo mật hoàn toàn dữ liệu.",
+        android_btn_download: "Tải xuống file APK (Google Drive)",
+        android_btn_download_sub: "Phiên bản v1.0.0 • Định dạng .APK",
+        android_guide_title: "Hướng dẫn cài đặt file APK",
+        android_guide_subtitle: "Vui lòng làm theo các bước bên dưới để cài đặt ứng dụng lên điện thoại Android của bạn.",
+        android_step_1_title: "Bước 1: Tải file APK",
+        android_step_1_desc: "Nhấn vào nút tải xuống phía trên để tải file APK của ứng dụng Vy score từ Google Drive về điện thoại.",
+        android_step_2_title: "Bước 2: Cho phép nguồn không xác định",
+        android_step_2_desc: "Mở file APK vừa tải về. Nếu điện thoại hiển thị cảnh báo bảo mật, hãy nhấn vào <strong>Cài đặt (Settings)</strong> và bật tùy chọn <strong>Cho phép từ nguồn này (Allow from this source)</strong>.",
+        android_step_3_title: "Bước 3: Tiến hành cài đặt",
+        android_step_3_desc: "Quay lại màn hình cài đặt và nhấn vào nút <strong>Cài đặt (Install)</strong>. Đợi vài giây để hệ thống hoàn tất cài đặt ứng dụng Vy score.",
+        android_step_4_title: "Bước 4: Cấp quyền & Sử dụng",
+        android_step_4_desc: "Mở ứng dụng từ màn hình chính. Khi mở ứng dụng lần đầu, hãy cấp quyền <strong>truy cập Camera</strong> để ứng dụng có thể chụp và nhận diện bài thi offline.",
+        android_warning_title: "Lưu ý bảo mật",
+        android_warning_desc: "File APK được cung cấp trực tiếp bởi nhà phát triển và hoàn toàn sạch sẽ, không chứa mã độc. Do ứng dụng chưa được phát hành trên cửa hàng Google Play, thiết bị Android sẽ hiển thị cảnh báo bảo mật khi cài đặt trực tiếp. Bạn hoàn toàn có thể yên tâm bỏ qua cảnh báo này.",
+        android_back_home: "Quay lại trang chủ",
+        android_offline_details_title: "Chấm điểm offline & Bảo mật tuyệt đối",
+        android_offline_details_desc: "Tương tự phiên bản iOS, ứng dụng Vy score trên Android xử lý dữ liệu hoàn toàn cục bộ trên thiết bị của bạn. Chúng tôi sử dụng cơ sở dữ liệu SQLite cục bộ để lưu trữ và mô hình AI nhận diện bài thi ngay trên máy mà không tải bất kỳ hình ảnh hay kết quả nào lên Internet."
     },
     en: {
         // Navigation & Actions
@@ -160,6 +185,7 @@ const translations = {
         hero_desc: "Powered by smart YOLO26 image recognition technology, <strong>Vy score</strong> helps teachers grade multiple-choice test papers in just 1 second using their phone's camera. All data is processed offline for 100% security.",
         hero_btn_support: "Contact Support",
         hero_btn_privacy: "Read Privacy Policy",
+        hero_btn_download_android: "Download Android (APK)",
         hero_img_alt: "Dashboard interface of the Vy score application on an iPhone",
 
         // Features Section
@@ -275,7 +301,31 @@ const translations = {
         btn_sending: "Sending...",
         val_required: "This field is required and cannot be left blank.",
         val_email_format: "Invalid email format (e.g., name@example.com).",
-        val_too_short: "Please enter at least {min} characters."
+        val_too_short: "Please enter at least {min} characters.",
+
+        // Android Page
+        android_page_title: "Vy score - Download App for Android",
+        android_meta_description: "Download the Android version (APK) of the Vy score AI camera multiple choice grading app, along with a detailed installation guide.",
+        android_hero_badge: "For Android Devices",
+        android_hero_title: "Download Vy score for Android",
+        android_hero_desc: "Download the official Android APK installation file for Vy score directly. The app runs 100% offline for fast, secure multiple-choice grading.",
+        android_btn_download: "Download APK File (Google Drive)",
+        android_btn_download_sub: "Version v1.0.0 • .APK Format",
+        android_guide_title: "How to Install the APK File",
+        android_guide_subtitle: "Please follow the steps below to install the app on your Android device.",
+        android_step_1_title: "Step 1: Download APK",
+        android_step_1_desc: "Click the download button above to download the Vy score APK file from Google Drive to your phone.",
+        android_step_2_title: "Step 2: Enable Unknown Sources",
+        android_step_2_desc: "Open the downloaded APK file. If a security warning appears, tap <strong>Settings</strong> and enable the <strong>Allow from this source</strong> option.",
+        android_step_3_title: "Step 3: Proceed with Installation",
+        android_step_3_desc: "Return to the installation screen and tap <strong>Install</strong>. Wait a few seconds for the system to complete the installation of Vy score.",
+        android_step_4_title: "Step 4: Grant Permissions & Use",
+        android_step_4_desc: "Open the app from the home screen. On first launch, grant <strong>Camera access</strong> so the app can scan and grade answer sheets offline.",
+        android_warning_title: "Security Notice",
+        android_warning_desc: "This APK file is directly provided by the developer and is completely clean and malware-free. Since the app is not yet published on the Google Play Store, Android devices will display a security warning when installing it directly. You can safely ignore this warning.",
+        android_back_home: "Back to Home",
+        android_offline_details_title: "Offline Grading & Complete Privacy",
+        android_offline_details_desc: "Just like the iOS version, Vy score for Android processes all data locally on your device. We use a local SQLite database for storage and an AI model for grading on-device, without uploading any images or results to the Internet."
     },
     'zh-CN': {
         // Navigation & Actions
@@ -299,6 +349,7 @@ const translations = {
         hero_desc: "采用先进的 YOLO26 图像识别技术，<strong>Vy score</strong> 帮助教师使用手机摄像头在短短 1 秒内完成选择题阅卷。数据完全在本地离线处理，确保 100% 隐私安全。",
         hero_btn_support: "联系客户支持",
         hero_btn_privacy: "阅读隐私政策",
+        hero_btn_download_android: "下载 Android 版 (APK)",
         hero_img_alt: "iPhone 上的 Vy score 应用程序仪表盘界面",
 
         // Features Section
@@ -414,6 +465,30 @@ const translations = {
         btn_sending: "正在发送...",
         val_required: "此项为必填项，请勿留空。",
         val_email_format: "电子邮箱格式不正确（例如：name@example.com）。",
-        val_too_short: "请至少输入 {min} 个字符。"
+        val_too_short: "请至少输入 {min} 个字符。",
+
+        // Android Page
+        android_page_title: "Vy score - 下载 Android 应用",
+        android_meta_description: "下载 Android 版本的 Vy score AI 相机选择题阅卷应用（APK 格式），以及详细的安装指南。",
+        android_hero_badge: "适用于 Android 设备",
+        android_hero_title: "下载 Vy score Android 版",
+        android_hero_desc: "直接下载 Vy score 应用的官方 Android APK 安装包。应用 100% 离线运行，实现快速、安全的选择题阅卷。",
+        android_btn_download: "下载 APK 安装包 (Google Drive)",
+        android_btn_download_sub: "版本 v1.0.0 • .APK 格式",
+        android_guide_title: "APK 安装指南",
+        android_guide_subtitle: "请按照以下步骤将应用安装到您的 Android 手机上。",
+        android_step_1_title: "第一步：下载 APK",
+        android_step_1_desc: "点击上方下载按钮，从 Google Drive 将 Vy score APK 文件下载到您的手机中。",
+        android_step_2_title: "第二步：允许未知来源安装",
+        android_step_2_desc: "打开已下载的 APK 文件。如果出现安全警告，请点击 <strong>设置 (Settings)</strong> 并启用 <strong>允许来自此来源 (Allow from this source)</strong> 选项。",
+        android_step_3_title: "第三步：进行安装",
+        android_step_3_desc: "返回安装界面并点击 <strong>安装 (Install)</strong>。等待几秒钟以完成 Vy score 的安装。",
+        android_step_4_title: "第四步：授权并使用",
+        android_step_4_desc: "从主屏幕打开应用。首次启动时，请授予 <strong>相机权限</strong>，以便应用可以离线扫描和批改答题卡。",
+        android_warning_title: "安全提示",
+        android_warning_desc: "此 APK 文件由开发者直接提供，完全安全且无恶意软件。由于应用尚未在 Google Play 商店发布，直接安装时 Android 会显示安全警报。您可以安全地忽略此警报。",
+        android_back_home: "返回首页",
+        android_offline_details_title: "离线阅卷与隐私保护",
+        android_offline_details_desc: "与 iOS 版本类似，Android 版 Vy score 完全在您设备本地处理所有数据。我们使用本地 SQLite 数据库进行存储，并使用 AI 模型在设备上进行阅卷，不会将任何图像或结果上传到互联网。"
     }
 };

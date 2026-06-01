@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollThreshold = 50;
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > scrollThreshold) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (header) {
+            if (window.scrollY > scrollThreshold) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         }
     });
 
@@ -89,98 +91,100 @@ document.addEventListener('DOMContentLoaded', () => {
     const langBtn = document.querySelector('.lang-btn');
     const langDropdown = document.querySelector('.lang-dropdown');
     const langSelectorContainer = document.querySelector('.lang-selector-container');
-    const langOptions = langDropdown.querySelectorAll('li');
+    const langOptions = langDropdown ? langDropdown.querySelectorAll('li') : [];
 
-    // Toggle dropdown
-    langBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = langDropdown.classList.contains('show');
-        langDropdown.classList.toggle('show', !isOpen);
-        langBtn.setAttribute('aria-expanded', !isOpen);
-    });
-
-    // Keyboard controls for the toggle button
-    langBtn.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
+    if (langBtn && langDropdown && langSelectorContainer) {
+        // Toggle dropdown
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             const isOpen = langDropdown.classList.contains('show');
-            if (!isOpen) {
-                langDropdown.classList.add('show');
-                langBtn.setAttribute('aria-expanded', 'true');
-            }
-            const activeOpt = langDropdown.querySelector('li.active') || langOptions[0];
-            if (activeOpt) {
-                activeOpt.focus();
-            }
-        }
-    });
+            langDropdown.classList.toggle('show', !isOpen);
+            langBtn.setAttribute('aria-expanded', !isOpen);
+        });
 
-    // Close on click or touch outside (touchstart makes it robust on mobile iOS Safari)
-    const closeDropdownOutside = (e) => {
-        if (!langSelectorContainer.contains(e.target)) {
-            langDropdown.classList.remove('show');
-            langBtn.setAttribute('aria-expanded', 'false');
-        }
-    };
-    document.addEventListener('click', closeDropdownOutside);
-    document.addEventListener('touchstart', closeDropdownOutside);
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const wasOpen = langDropdown.classList.contains('show');
-            langDropdown.classList.remove('show');
-            langBtn.setAttribute('aria-expanded', 'false');
-            if (wasOpen) {
-                langBtn.focus();
-            }
-        }
-    });
-
-    // Handle language selection & keyboard navigation
-    langOptions.forEach((option, index) => {
-        const selectLang = () => {
-            const selectedLang = option.getAttribute('data-lang');
-            
-            // Set active class in UI
-            langOptions.forEach(opt => {
-                opt.classList.remove('active');
-                opt.setAttribute('aria-selected', 'false');
-            });
-            option.classList.add('active');
-            option.setAttribute('aria-selected', 'true');
-            
-            // Close dropdown
-            langDropdown.classList.remove('show');
-            langBtn.setAttribute('aria-expanded', 'false');
-            langBtn.focus(); // return focus to the button
-
-            // Apply translations
-            applyLanguage(selectedLang);
-        };
-
-        option.addEventListener('click', selectLang);
-
-        option.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
+        // Keyboard controls for the toggle button
+        langBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                selectLang();
-            } else if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                const nextIndex = (index + 1) % langOptions.length;
-                langOptions[nextIndex].focus();
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                const prevIndex = (index - 1 + langOptions.length) % langOptions.length;
-                langOptions[prevIndex].focus();
-            } else if (e.key === 'Escape') {
-                e.preventDefault();
-                langDropdown.classList.remove('show');
-                langBtn.setAttribute('aria-expanded', 'false');
-                langBtn.focus();
+                const isOpen = langDropdown.classList.contains('show');
+                if (!isOpen) {
+                    langDropdown.classList.add('show');
+                    langBtn.setAttribute('aria-expanded', 'true');
+                }
+                const activeOpt = langDropdown.querySelector('li.active') || langOptions[0];
+                if (activeOpt) {
+                    activeOpt.focus();
+                }
             }
         });
-    });
+
+        // Close on click or touch outside (touchstart makes it robust on mobile iOS Safari)
+        const closeDropdownOutside = (e) => {
+            if (!langSelectorContainer.contains(e.target)) {
+                langDropdown.classList.remove('show');
+                langBtn.setAttribute('aria-expanded', 'false');
+            }
+        };
+        document.addEventListener('click', closeDropdownOutside);
+        document.addEventListener('touchstart', closeDropdownOutside);
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const wasOpen = langDropdown.classList.contains('show');
+                langDropdown.classList.remove('show');
+                langBtn.setAttribute('aria-expanded', 'false');
+                if (wasOpen) {
+                    langBtn.focus();
+                }
+            }
+        });
+
+        // Handle language selection & keyboard navigation
+        langOptions.forEach((option, index) => {
+            const selectLang = () => {
+                const selectedLang = option.getAttribute('data-lang');
+                
+                // Set active class in UI
+                langOptions.forEach(opt => {
+                    opt.classList.remove('active');
+                    opt.setAttribute('aria-selected', 'false');
+                });
+                option.classList.add('active');
+                option.setAttribute('aria-selected', 'true');
+                
+                // Close dropdown
+                langDropdown.classList.remove('show');
+                langBtn.setAttribute('aria-expanded', 'false');
+                langBtn.focus(); // return focus to the button
+
+                // Apply translations
+                applyLanguage(selectedLang);
+            };
+
+            option.addEventListener('click', selectLang);
+
+            option.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    selectLang();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const nextIndex = (index + 1) % langOptions.length;
+                    langOptions[nextIndex].focus();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prevIndex = (index - 1 + langOptions.length) % langOptions.length;
+                    langOptions[prevIndex].focus();
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    langDropdown.classList.remove('show');
+                    langBtn.setAttribute('aria-expanded', 'false');
+                    langBtn.focus();
+                }
+            });
+        });
+    }
 
     // Function to apply translations
     function applyLanguage(lang) {
@@ -305,80 +309,88 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Attach real-time validation on blur/input
-    const formInputs = form.querySelectorAll('input:not(#honeypot), textarea');
-    formInputs.forEach(input => {
-        input.addEventListener('blur', () => validateField(input));
-        input.addEventListener('input', () => {
-            if (input.parentElement.classList.contains('invalid')) {
-                validateField(input);
-            }
-        });
-    });
-
-    // Form Submission
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        // Check honeypot (Anti-spam)
-        if (honeypot.value !== '') {
-            console.warn('Spam submission detected via honeypot.');
-            return; // Discard silently
-        }
-
-        // Validate all fields
-        let isFormValid = true;
+    if (form) {
+        // Attach real-time validation on blur/input
+        const formInputs = form.querySelectorAll('input:not(#honeypot), textarea');
         formInputs.forEach(input => {
-            const isValid = validateField(input);
-            if (!isValid) isFormValid = false;
-        });
-
-        if (!isFormValid) {
-            // Focus on first invalid input
-            const firstInvalid = form.querySelector('.form-group.invalid input, .form-group.invalid textarea');
-            if (firstInvalid) firstInvalid.focus();
-            return;
-        }
-
-        const currentLang = safeLocalStorage.getItem('preferred-lang') || 'vi';
-
-        // Simulating Form Submission success
-        const submitBtn = document.getElementById('submit-btn');
-        const originalText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = translations[currentLang].btn_sending;
-
-        setTimeout(() => {
-            // Show toast message
-            showToast(translations[currentLang].toast_success);
-            
-            // Reset form
-            form.reset();
-            formInputs.forEach(input => {
-                input.parentElement.classList.remove('invalid');
-                const errorSpan = document.getElementById(`${input.id}-error`);
-                if (errorSpan) {
-                    errorSpan.textContent = '';
-                    errorSpan.setAttribute('aria-hidden', 'true');
+            input.addEventListener('blur', () => validateField(input));
+            input.addEventListener('input', () => {
+                if (input.parentElement.classList.contains('invalid')) {
+                    validateField(input);
                 }
             });
+        });
 
-            submitBtn.disabled = false;
-            submitBtn.textContent = translations[currentLang].form_submit_btn;
-        }, 1200);
-    });
+        // Form Submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Check honeypot (Anti-spam)
+            if (honeypot && honeypot.value !== '') {
+                console.warn('Spam submission detected via honeypot.');
+                return; // Discard silently
+            }
+
+            // Validate all fields
+            let isFormValid = true;
+            formInputs.forEach(input => {
+                const isValid = validateField(input);
+                if (!isValid) isFormValid = false;
+            });
+
+            if (!isFormValid) {
+                // Focus on first invalid input
+                const firstInvalid = form.querySelector('.form-group.invalid input, .form-group.invalid textarea');
+                if (firstInvalid) firstInvalid.focus();
+                return;
+            }
+
+            const currentLang = safeLocalStorage.getItem('preferred-lang') || 'vi';
+
+            // Simulating Form Submission success
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn ? submitBtn.textContent : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = translations[currentLang].btn_sending;
+            }
+
+            setTimeout(() => {
+                // Show toast message
+                showToast(translations[currentLang].toast_success);
+                
+                // Reset form
+                form.reset();
+                formInputs.forEach(input => {
+                    input.parentElement.classList.remove('invalid');
+                    const errorSpan = document.getElementById(`${input.id}-error`);
+                    if (errorSpan) {
+                        errorSpan.textContent = '';
+                        errorSpan.setAttribute('aria-hidden', 'true');
+                    }
+                });
+
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = translations[currentLang].form_submit_btn;
+                }
+            }, 1200);
+        });
+    }
 
     const showToast = (message) => {
-        const toastMsg = toast.querySelector('.toast-message');
-        toastMsg.textContent = message;
-        toast.classList.add('show');
-        toast.setAttribute('aria-hidden', 'false');
+        if (toast) {
+            const toastMsg = toast.querySelector('.toast-message');
+            if (toastMsg) toastMsg.textContent = message;
+            toast.classList.add('show');
+            toast.setAttribute('aria-hidden', 'false');
 
-        // Hide after 4 seconds
-        setTimeout(() => {
-            toast.classList.remove('show');
-            toast.setAttribute('aria-hidden', 'true');
-        }, 4000);
+            // Hide after 4 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.setAttribute('aria-hidden', 'true');
+            }, 4000);
+        }
     };
 
     /* ==========================================================================
@@ -399,14 +411,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!translations[savedLang]) {
         savedLang = 'vi';
     }
-    const activeOption = langDropdown.querySelector(`[data-lang="${savedLang}"]`) || langDropdown.querySelector('[data-lang="vi"]');
-    if (activeOption) {
-        langOptions.forEach(opt => {
-            opt.classList.remove('active');
-            opt.setAttribute('aria-selected', 'false');
-        });
-        activeOption.classList.add('active');
-        activeOption.setAttribute('aria-selected', 'true');
-        applyLanguage(savedLang);
+    if (langDropdown) {
+        const activeOption = langDropdown.querySelector(`[data-lang="${savedLang}"]`) || langDropdown.querySelector('[data-lang="vi"]');
+        if (activeOption) {
+            langOptions.forEach(opt => {
+                opt.classList.remove('active');
+                opt.setAttribute('aria-selected', 'false');
+            });
+            activeOption.classList.add('active');
+            activeOption.setAttribute('aria-selected', 'true');
+        }
     }
+    applyLanguage(savedLang);
 });

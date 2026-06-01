@@ -1045,4 +1045,222 @@ img {
     }
 }
 
+/* ==========================================================================
+   ANDROID DOWNLOAD PAGE STYLES
+   ========================================================================== */
+:root {
+    --android-green: #3ddc84;
+    --android-green-glow: rgba(61, 220, 132, 0.15);
+    --android-green-dark: #07301b;
+}
+
+.android-hero {
+    padding-block-start: calc(var(--header-height) + 5rem);
+    padding-block-end: 4rem;
+    text-align: center;
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(61, 220, 132, 0.08) 0%, transparent 50%);
+}
+
+.android-hero .container {
+    max-width: 800px;
+}
+
+.android-badge {
+    background-color: var(--android-green-glow);
+    border: 1px solid rgba(61, 220, 132, 0.4);
+    color: #2b8a3e;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-block-end: 1.5rem;
+}
+
+.android-badge::before {
+    content: "🤖";
+    font-size: 1rem;
+}
+
+.btn-android {
+    background: linear-gradient(135deg, #3ddc84 0%, #2b8a3e 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 14px var(--android-green-glow);
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-md);
+    gap: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-android:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(61, 220, 132, 0.45);
+    color: #ffffff;
+}
+
+.btn-android-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-block-start: 0.5rem;
+    display: block;
+}
+
+/* Steps section */
+.guide-section {
+    padding: 4rem 0;
+    background-color: var(--bg-surface);
+}
+
+.guide-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-block-start: 3rem;
+}
+
+.guide-step-card {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 1.5rem;
+    position: relative;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.guide-step-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(61, 220, 132, 0.5);
+    box-shadow: 0 10px 30px var(--android-green-glow);
+}
+
+.step-num-circle {
+    width: 50px;
+    height: 50px;
+    background-color: var(--android-green-glow);
+    border: 2px solid var(--android-green);
+    color: #2b8a3e;
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-block-end: 1.5rem;
+}
+
+.guide-step-card h3 {
+    font-size: 1.15rem;
+    margin-block-end: 0.75rem;
+}
+
+.guide-step-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Warnings & notices */
+.notice-section {
+    padding: 4rem 0;
+}
+
+.notice-card {
+    background-color: #fff9db;
+    border: 1px solid #ffe066;
+    border-radius: var(--radius-md);
+    padding: 2.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.notice-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.notice-info h3 {
+    color: #f08c00;
+    font-size: 1.25rem;
+    margin-block-end: 0.75rem;
+}
+
+.notice-info p {
+    font-size: 0.95rem;
+    color: #665000;
+    line-height: 1.6;
+}
+
+/* Offline info section */
+.offline-info-section {
+    padding: 4rem 0;
+    border-block-start: 1px solid var(--border);
+    background-color: var(--bg-surface);
+}
+
+.offline-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.offline-info-content h2 {
+    font-size: 2rem;
+    margin-block-end: 1.5rem;
+}
+
+.offline-info-content p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* Back Link styling */
+.back-link-container {
+    margin-block-start: 3rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.back-link:hover {
+    color: var(--primary);
+    transform: translateX(-4px);
+}
+
+@media (max-width: 768px) {
+    .offline-info-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .notice-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem;
+    }
+}
+
 
